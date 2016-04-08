@@ -21,7 +21,7 @@
 -- example command: ncat -vlkp [listening_port] --lua-exec [full_path_to_this_file]
 
 BANNER = "220 PCMan's FTP Server 2.0 Ready.\r" -- Fake banner message mimicking a real ftp service
-cmd_list = {'pwd','list','mkd','port','quit','dele','syst','stat','size','stor'} -- Command recognized by server (Server will complain login is needed before command is used)
+cmd_list = {pwd=true,list=true,mkd=true,port=true,quit=true,dele=true,syst=true,stat=true,size=true,stor=true} -- Command recognized by server (Server will complain login is needed before command is used)
 print(BANNER)
 while( true ) -- starts 1 on 1 communication
 do
@@ -42,5 +42,6 @@ userinput = io.read() -- gets user input
 		print('530 Not logged in.\r')
 	else
 		print('500 Syntax error, command unrecognized.\r')
+		print(t[1]:lower())
 	end
 end
